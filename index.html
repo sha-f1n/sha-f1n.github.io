@@ -4,7 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Sanctuary</title>
+<meta name="theme-color" content="#080607">
+
+<title>_shaf1n | Nyx_Vale</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -13,51 +19,113 @@
     box-sizing: border-box;
 }
 
-body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #080607;
-    color: #eee5e5;
-    font-family: Georgia, serif;
-    overflow-x: hidden;
+:root {
+    --red: #8f263b;
+    --red-light: #c04b60;
+    --white: #e8e1e2;
+    --muted: #a69a9d;
+    --background: #080607;
 }
 
-/* Background */
-body::before {
-    content: "";
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: var(--background);
+    color: var(--white);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    cursor: crosshair;
+}
+
+/* Atmospheric gothic background */
+
+.background {
     position: fixed;
     inset: 0;
+    z-index: -2;
     background:
-      radial-gradient(ellipse at 50% 45%,
-      rgba(105, 12, 31, 0.23), transparent 65%);
-    animation: breathe 6s ease-in-out infinite alternate;
+        radial-gradient(ellipse at 50% 20%,
+        rgba(90, 35, 46, .20), transparent 45%),
+        radial-gradient(ellipse at 12% 55%,
+        rgba(45, 20, 27, .35), transparent 50%),
+        radial-gradient(ellipse at 90% 75%,
+        rgba(65, 18, 29, .20), transparent 45%),
+        linear-gradient(180deg, #080708, #100a0d 65%, #050405);
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .35;
+    background:
+        radial-gradient(circle at 50% 5%,
+        transparent 0 100px,
+        rgba(160, 130, 135, .15) 102px,
+        transparent 106px);
+}
+
+.background::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .12;
+    background-image:
+        repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255,255,255,.035) 4px
+        );
     pointer-events: none;
 }
 
-@keyframes breathe {
-    from { opacity: .45; }
-    to { opacity: 1; }
+/* Ambient red light */
+
+.glow {
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: rgba(105, 15, 36, .10);
+    filter: blur(110px);
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: pulse 8s ease-in-out infinite alternate;
 }
 
-/* Profile card */
-.card {
-    position: relative;
-    width: min(90%, 440px);
-    padding: 48px 30px;
+@keyframes pulse {
+    from { opacity: .4; transform: translate(-50%, -50%) scale(.8); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* Main profile */
+
+main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 55px 20px;
+}
+
+.profile {
+    width: 100%;
+    max-width: 650px;
     text-align: center;
-    background: rgba(19, 13, 15, .88);
-    border: 1px solid rgba(151, 42, 62, .3);
-    border-radius: 8px;
-    box-shadow: 0 20px 80px rgba(0,0,0,.6);
-    animation: appear 1.2s ease both;
+    animation: entrance 1.5s ease both;
 }
 
-@keyframes appear {
+@keyframes entrance {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(25px);
     }
     to {
         opacity: 1;
@@ -65,118 +133,256 @@ body::before {
     }
 }
 
-/* Avatar */
+/* Avatar emblem */
+
 .avatar {
-    width: 105px;
-    height: 105px;
-    margin: 0 auto 24px;
+    width: 145px;
+    height: 145px;
+    margin: 0 auto 22px;
+    border: 1px solid var(--red);
     border-radius: 50%;
-    border: 2px solid #782437;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #210e14;
-    color: #c36b7c;
-    font-size: 36px;
-    box-shadow: 0 0 30px rgba(132, 25, 52, .2);
+    background:
+        radial-gradient(circle, #28151b, #0b0809 72%);
+    box-shadow: 0 0 35px rgba(126, 24, 48, .17);
+    position: relative;
 }
+
+.avatar::before {
+    content: "✦";
+    color: var(--red-light);
+    font-size: 62px;
+    text-shadow: 0 0 25px rgba(180, 50, 75, .5);
+}
+
+.avatar::after {
+    content: "";
+    position: absolute;
+    inset: -9px;
+    border: 1px solid rgba(143, 38, 59, .3);
+    border-radius: 50%;
+}
+
+/* Name */
 
 h1 {
-    font-size: 32px;
-    font-weight: normal;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-
-.tagline {
-    color: #a47b83;
-    font-size: 13px;
+    font-family: 'UnifrakturMaguntia', Georgia, serif;
+    font-size: clamp(48px, 9vw, 72px);
+    font-weight: 400;
     letter-spacing: 1px;
-    margin-bottom: 25px;
+    color: #eee7e8;
+    text-shadow: 0 0 25px rgba(180, 130, 140, .12);
 }
 
-.bio {
-    color: #b9a9ad;
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 30px;
+.username {
+    margin-top: 2px;
+    font-family: 'UnifrakturMaguntia', Georgia, serif;
+    font-size: 27px;
+    color: var(--red-light);
+    letter-spacing: 2px;
 }
+
+/* Divider */
 
 .divider {
-    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 35px auto 25px;
+    max-width: 320px;
+    color: var(--red);
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
     height: 1px;
-    background: #782437;
-    margin: 0 auto 25px;
+    background: linear-gradient(90deg, transparent, var(--red));
+}
+
+.divider::after {
+    background: linear-gradient(90deg, var(--red), transparent);
+}
+
+.divider span {
+    font-size: 22px;
+}
+
+/* Biography */
+
+.bio {
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: #d2c5c8;
+    font-style: italic;
+    margin-bottom: 43px;
 }
 
 /* Social links */
-.links {
+
+.socials {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 0;
 }
 
-.links a {
-    color: #d8b9c0;
+.social {
+    min-width: 125px;
+    padding: 10px 17px;
     text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    letter-spacing: 1px;
-    padding: 11px 17px;
-    border: 1px solid #49202c;
-    transition: .3s ease;
+    color: var(--white);
+    border-right: 1px solid rgba(143, 38, 59, .35);
+    transition: .35s ease;
 }
 
-.links a:hover {
-    color: white;
-    background: #571b2b;
-    border-color: #a33c56;
-    box-shadow: 0 0 18px rgba(145, 30, 57, .25);
+.social:last-child {
+    border-right: none;
 }
+
+.social:hover {
+    color: var(--red-light);
+    transform: translateY(-5px);
+}
+
+.social .symbol {
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 27px;
+    margin-bottom: 9px;
+}
+
+.social .label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.social .detail {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
+
+/* Footer */
 
 footer {
-    margin-top: 35px;
+    margin-top: 48px;
+    font-size: 11px;
+    letter-spacing: 4px;
     color: #66545a;
-    font-size: 10px;
-    letter-spacing: 2px;
-    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+footer span {
+    color: var(--red);
+}
+
+/* Mobile */
+
+@media (max-width: 520px) {
+    main {
+        padding: 35px 12px;
+    }
+
+    .avatar {
+        width: 115px;
+        height: 115px;
+    }
+
+    .social {
+        min-width: 115px;
+        margin-bottom: 20px;
+    }
+
+    .social:nth-child(2) {
+        border-right: none;
+    }
+
+    .bio {
+        font-size: 17px;
+        letter-spacing: 2px;
+    }
+}
+
+::selection {
+    background: var(--red);
+    color: white;
 }
 </style>
 </head>
 
 <body>
 
-<main class="card">
+<div class="background"></div>
+<div class="glow"></div>
 
-    <div class="avatar">✦</div>
+<main>
+<section class="profile">
 
-    <h1>YOUR NAME</h1>
+    <div class="avatar"></div>
 
-    <p class="tagline">
-        A DIGITAL SANCTUARY FOR THE INTELLECTUALLY RESTLESS.
-    </p>
+    <h1>_shaf1n</h1>
+    <div class="username">Nyx_Vale</div>
 
-    <div class="divider"></div>
+    <div class="divider">
+        <span>✥</span>
+    </div>
 
-    <p class="bio">
-        A mind wandering through fiction, knowledge,
-        games and the obscure corners of existence.
-        <br>
-        Welcome to my little corner of the internet.
-    </p>
+    <p class="bio">we have failed as humans.</p>
 
-    <div class="links">
-        <a href="#" target="_blank">STEAM</a>
-        <a href="#" target="_blank">DISCORD</a>
-        <a href="#" target="_blank">GITHUB</a>
-        <a href="#" target="_blank">INSTAGRAM</a>
+    <div class="socials">
+
+        <a class="social"
+           href="https://www.facebook.com/shaf1nyx/"
+           target="_blank" rel="noopener noreferrer">
+            <span class="symbol">f</span>
+            <span class="label">Facebook</span>
+            <span class="detail">shaf1nyx</span>
+        </a>
+
+        <a class="social"
+           href="https://discord.com/users/344499349612658688"
+           target="_blank" rel="noopener noreferrer">
+            <span class="symbol">◈</span>
+            <span class="label">Discord</span>
+            <span class="detail">344499349612658688</span>
+        </a>
+
+        <a class="social"
+           href="https://www.instagram.com/_shaf1n/"
+           target="_blank" rel="noopener noreferrer">
+            <span class="symbol">◎</span>
+            <span class="label">Instagram</span>
+            <span class="detail">_shaf1n</span>
+        </a>
+
+        <a class="social"
+           href="https://steamcommunity.com/id/_shafin/"
+           target="_blank" rel="noopener noreferrer">
+            <span class="symbol">◉</span>
+            <span class="label">Steam</span>
+            <span class="detail">_shafin</span>
+        </a>
+
+    </div>
+
+    <div class="divider">
+        <span>❖</span>
     </div>
 
     <footer>
-        EST. 2026 · OWNED BY ME
+        EST. 2026 <span>✦</span> NYX_VALE
     </footer>
 
+</section>
 </main>
 
 </body>
