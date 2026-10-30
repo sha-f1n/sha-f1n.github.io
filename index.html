@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nyx_Vale</title>
+  <meta name="description" content="Nyx_Vale. Games, films, music.">
+  <meta name="theme-color" content="#0b0b0c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scene" id="scene" aria-hidden="true">
+    <div class="photo" id="photo"></div>
+    <div class="moon"></div>
+    <div class="mist mist-a"></div>
+    <div class="mist mist-b"></div>
+    <canvas id="snow"></canvas>
+    <div class="vignette"></div>
+  </div>
+
+  <button class="gate" id="gate" type="button">
+    <span>click to enter</span>
+  </button>
+
+  <button class="sound" id="sound" type="button" aria-label="Mute music" hidden>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+      <path class="waves" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      <path class="slash" d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </button>
+
+  <main class="card" id="card">
+    <div class="avatar" id="avatar"><span id="avatarFallback"></span></div>
+    <h1 id="name"></h1>
+    <p class="tagline" id="tagline"></p>
+    <p class="where" id="where"></p>
+
+    <a class="steam" id="steamCard" target="_blank" rel="noopener">
+      <span class="steam-icon" id="steamIcon"></span>
+      <span class="steam-text">
+        <span class="steam-count" id="steamCount">&mdash;</span>
+        <span class="steam-label">games on Steam</span>
+        <span class="steam-updated" id="steamUpdated"></span>
+      </span>
+    </a>
+
+    <nav class="links" id="links" aria-label="Social links"></nav>
+  </main>
+
+  <audio id="audio" loop preload="auto"></audio>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
